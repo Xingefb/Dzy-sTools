@@ -19,6 +19,15 @@
 {
     __block BOOL bCanRecord = NO;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+//    method 1
+//    AVAudioSessionRecordPermission authStatus = audioSession.recordPermission;
+//    if (authStatus == AVAudioSessionRecordPermissionGranted) {
+//        NSLog(@"activity...");
+//        return YES;
+//    }else {
+//        return NO;
+//    }
+    // method 2
     if ([audioSession respondsToSelector:@selector(requestRecordPermission:)]) {
         [audioSession performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
             bCanRecord = granted;
